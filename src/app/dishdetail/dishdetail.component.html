@@ -7,11 +7,13 @@
     fxLayoutGap.xs="0">
 
   <div fxFlex="40">
-    <div *ngIf="dish">
+    <div *ngIf="dish">  <!-- #1 el nombre en el ngIf y el objetos que usamos en todo este archivo debe coincidir
+                            con el que pasamos entre corchetes en menu.component.ts y declaramos en
+                            dishdetail.component.ts -->
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
-                    <h3> {{dish.name | uppercase}} </h3>
+                    <h3> {{dish.name | uppercase}} </h3> 
                 </mat-card-title>
             </mat-card-header>
             <img mat-card-image src={{dish.image}} atl={{dish.name}}>
