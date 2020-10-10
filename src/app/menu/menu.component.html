@@ -1,6 +1,4 @@
 <<<<<<< HEAD
-<div class="container" fxLayout="column" fxLayoutGap="10px">
-=======
 <div class="container"
     fxLayout="row"
     fxLayout.sm="column"
@@ -8,7 +6,9 @@
     fxLayoutAlign.gt-md="space-around center"
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
->>>>>>> c23966f... modificamos el diseño
+=======
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+>>>>>>> 18415d9... Add 'display selected product information' feature using data binding
 
     <div fxFlex>
         <div>
@@ -19,7 +19,11 @@
 
     <div fxFlex>
         <mat-grid-list cols="2" rowHeight="200px">
-            <mat-grid-tile *ngFor="let dish of dishes">
+<<<<<<< HEAD
+            <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
+=======
+            <mat-grid-tile *ngFor="let dish of dishes" (click)="onSelect(dish)">
+>>>>>>> 18415d9... Add 'display selected product information' feature using data binding
                 <img height="200px" src={{dish.image}} alt={{dish.name}}>
                 <mat-grid-tile-footer>
                     <h1> {{dish.name | uppercase}} </h1>
@@ -27,7 +31,12 @@
             </mat-grid-tile>
         </mat-grid-list>
     </div>
+<<<<<<< HEAD
+=======
 
-    <app-dishdetail></app-dishdetail>
+    <app-dishdetail [dish]="selectedDish"></app-dishdetail>  <!-- #1 Lo que va entre corchetes es el objeto
+                                                                pasamos al componente y el nombre debe
+                                                                coincidir dentro del componente -->
 
+>>>>>>> 18415d9... Add 'display selected product information' feature using data binding
 </div>
