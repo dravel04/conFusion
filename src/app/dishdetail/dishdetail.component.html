@@ -1,26 +1,32 @@
 <div class="container"
-    fxLayout="row"
+    fxLayout="row wrap"
     fxLayout.sm="column"
     fxLayout.xs="column"
     fxLayoutAlign.gt-md="space-around center"
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
+    <div fxFlex="100">
+        <div>
+          <h3>{{dish.name | uppercase}}</h3>
+          <hr>
+        </div>
+      </div>
+
   <div fxFlex="40">
-    <div *ngIf="dish">  <!-- #1 el nombre en el ngIf y el objetos que usamos en todo este archivo debe coincidir
-                            con el que pasamos entre corchetes en menu.component.ts y declaramos en
-                            dishdetail.component.ts -->
+    <div *ngIf="dish">
         <mat-card>
-            <mat-card-header>
+            <mat-card-head>
                 <mat-card-title>
-                    <h3> {{dish.name | uppercase}} </h3> 
+                    <h3> {{dish.name | uppercase}} </h3>
                 </mat-card-title>
-            </mat-card-header>
+            </mat-card-head>            
             <img mat-card-image src={{dish.image}} atl={{dish.name}}>
             <mat-card-content>
                 <p>{{dish.description}}</p>
             </mat-card-content>
             <mat-card-actions>
+                <button mat-button (click)="goBack()">BACK</button>
                 <button mat-button>LIKE</button>
                 <button mat-button>SHARE</button>
             </mat-card-actions>
