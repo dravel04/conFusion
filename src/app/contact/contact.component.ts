@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Feedback, ContactType } from '../shared/feedback';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  feedbackForm: FormGroup;
+  feedback: Feedback;
+  contactType = ContactType;
 
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
+
+  ngOnInit() {
+  }
+
+  createForm() {
+    this.feedbackForm = this.fb.group({
+      firstname: '',
+      lastname: '',
+      telnum: 0,
+      email: '',
+      agree: false,
+      contacttype: 'None',
+      message: ''
+    });
+  }
+
+  onSubmit() {
+    this.feedback = this.feedbackForm.value;  /*podemos mapear los valores directamente ya que la estructura
+                                                de la clases Feedback es idéntica a la creada en en el metodo
+                                                createForm() e instanciado a traves de feedbackForm.
+                                                De no ser así, debemos mapear uno a uno los datos necesarios.*/
+    console.log(this.feedback);
+    this.feedbackForm.reset();
   }
 
 }
