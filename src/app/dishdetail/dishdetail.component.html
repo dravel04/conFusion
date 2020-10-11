@@ -10,10 +10,10 @@
     <div [hidden]="dish">
         <mat-spinner></mat-spinner>
         <h4>Loading . . . Please Wait</h4>
-      </div>
+    </div>
 
-    <div fxFlex="40">
-        <div *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish">
+        <div>
             <!-- #1 el nombre en el ngIf y el objetos que usamos en todo este archivo debe coincidir
                             con el que pasamos entre corchetes en menu.component.ts y declaramos en
                             dishdetail.component.ts -->
@@ -27,17 +27,22 @@
                 <mat-card-content>
                     <p>{{dish.description}}</p>
                 </mat-card-content>
-                <mat-card-actions>
+                <mat-card-actions>                    
+                    <button mat-button [routerLink]="['/dishdetail', prev]"><span
+                            class="fa fa-chevron-left fa-lg"></span></button>
                     <button mat-button (click)="goBack()">BACK</button>
                     <button mat-button>LIKE</button>
                     <button mat-button>SHARE</button>
+                    <span class="flex-spacer"></span>
+                    <button mat-button [routerLink]="['/dishdetail', next]"><span
+                            class="fa fa-chevron-right fa-lg"></span></button>
                 </mat-card-actions>
             </mat-card>
         </div>
     </div>
 
-    <div fxFlex="40">
-        <mat-list *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish">
+        <mat-list>
             <h1>Comments</h1>
             <mat-list-item *ngFor="let comment of dish.comments">
                 <p matLine>{{comment.comment}}</p>

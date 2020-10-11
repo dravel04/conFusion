@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-dishdetail',
@@ -13,23 +14,31 @@ import { DishService } from '../services/dish.service';
 export class DishdetailComponent implements OnInit {
 
   dish: Dish;
+  dishIds: string[];
+  prev: string;
+  next: string;
   
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];  // extraemos el valor del parametro "id" dentro del URL
-    this.getDish(id);  // extraemos la información asociada al plato con la id pasada
+    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.getDish();
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  getDish(id:string): void {
-    this.dishservice.getDish(id)
-      .subscribe((dish) => this.dish = dish);
+  getDish(): void {
+    this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
+    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
   }
 
+  setPrevNext(dishId: string) {
+    const index = this.dishIds.indexOf(dishId);
+    this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
+    this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
+  }
 }
