@@ -29,7 +29,7 @@ export class DishdetailComponent implements OnInit {
 
   getDish(id:string): void {
     this.dishservice.getDish(id)
-      .then((dish) => this.dish = dish);
+      .subscribe((dish) => this.dish = dish);
   }
 
 }

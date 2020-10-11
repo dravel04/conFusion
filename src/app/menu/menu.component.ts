@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
 
   getDishes(): void {
     this.dishService.getDishes()
-      .then((dishes) => this.dishes = dishes);
+      .subscribe((dishes) => this.dishes = dishes);
   }
 
 }

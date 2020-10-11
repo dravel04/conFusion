@@ -19,7 +19,7 @@ export class AboutComponent implements OnInit {
 
   getLeaders(): void {
     this.leaderService.getLeaders()
-      .then((leaders) => this.pacos = leaders);
+      .subscribe((leaders) => this.pacos = leaders);
   }
 
 }

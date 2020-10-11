@@ -29,15 +29,15 @@ export class HomeComponent implements OnInit {
 
   getFeaturedDish(): void{
     this.dishservice.getFeaturedDish()
-      .then((dish) => this.dish = dish);
+      .subscribe((dish) => this.dish = dish);
   }
   getFeaturedPromotion(): void{
     this.promotionservice.getFeaturedPromotion()
-      .then((promotion) => this.promotion = promotion);
+      .subscribe((promotion) => this.promotion = promotion);
   }
   getFeaturedLeader(): void{
     this.leaderservice.getFeaturedLeader()
-      .then((leader) => this.leader = leader);
+      .subscribe((leader) => this.leader = leader);
   }
 
 }
