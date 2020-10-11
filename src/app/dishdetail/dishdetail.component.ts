@@ -20,11 +20,16 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];  // extraemos el valor del parametro "id" dentro del URL
-    this.dish = this.dishservice.getDish(id);  // extraemos la información asociada al plato con la id pasada
+    this.getDish(id);  // extraemos la información asociada al plato con la id pasada
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  getDish(id:string): void {
+    this.dishservice.getDish(id)
+      .then((dish) => this.dish = dish);
   }
 
 }
