@@ -45,7 +45,7 @@ export class ContactComponent implements OnInit {
     },
     'message': {
       'required': 'Feedback is required.',
-      'minlength': 'Last Name must be at least 2 characters long.'
+      'minlength': 'Feedback must be at least 2 characters long.'
     },
   };
 
