@@ -11,6 +11,7 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Dish[];
+  errMsg: string;
 
   constructor(private dishService: DishService,
     @Inject('BaseURL') private baseURL:string) { }
@@ -21,7 +22,8 @@ export class MenuComponent implements OnInit {
 
   getDishes(): void {
     this.dishService.getDishes()
-      .subscribe((dishes) => this.dishes = dishes);
+      .subscribe((dishes) => this.dishes = dishes,
+        errmsg => this.errMsg = <any>errmsg);
   }
 
 }
