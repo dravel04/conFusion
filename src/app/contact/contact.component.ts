@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FeedbackService } from '../services/feedback.service';
 
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut, expand } from '../animations/app.animation';
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-contact',
@@ -11,11 +12,12 @@ import { flyInOut, expand } from '../animations/app.animation';
   host: {
     '[@flyInOut]': 'true',
     'style': 'display: block;'
-    },
-    animations: [
-      flyInOut(),
-      expand()
-    ]
+  },
+  animations: [
+    visibility(),
+    flyInOut(),
+    expand()
+  ]
 })
 export class ContactComponent implements OnInit {
 
@@ -23,7 +25,11 @@ export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  lastfeedback: Feedback;
+  feedbacks: Feedback[];
   contactType = ContactType;
+  errMsg: string;
+  isShown = true;
 
   formErrors = {
     'firstname': '',
@@ -58,7 +64,8 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private feedbackservice: FeedbackService) {
     this.createForm();
   }
 
@@ -109,7 +116,15 @@ export class ContactComponent implements OnInit {
                                                 createForm() e instanciado a traves de feedbackForm.
                                                 De no ser así, debemos mapear uno a uno los datos necesarios.*/
     console.log(this.feedback);
-    this.feedbackFormDirective.resetForm();
+    this.toggle();
+    this.feedbackservice.submitFeedback(this.feedback)
+      .subscribe(feedback => {this.lastfeedback = feedback; setTimeout(() => this.toggle(), 5000); },
+        errmsg => { this.lastfeedback = null; this.errMsg = <any>errmsg; });
+    this.feedbackFormDirective.resetForm();  
+  }
+
+  toggle() {
+    this.isShown = !this.isShown;
   }
 
 }

@@ -19,6 +19,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 export class AboutComponent implements OnInit {
 
   pacos: Leader[];
+  errLeaderMsg: string;
 
   constructor(private leaderService: LeaderService,
     @Inject('BaseURL') private baseURL:string) { }
@@ -29,7 +30,8 @@ export class AboutComponent implements OnInit {
 
   getLeaders(): void {
     this.leaderService.getLeaders()
-      .subscribe((leaders) => this.pacos = leaders);
+      .subscribe((leaders) => this.pacos = leaders,
+      errmsg => this.errLeaderMsg = <any>errmsg);
   }
 
 }

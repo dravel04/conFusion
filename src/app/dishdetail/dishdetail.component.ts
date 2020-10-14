@@ -107,8 +107,8 @@ export class DishdetailComponent implements OnInit {
     console.log(this.comment);
     this.dishcopy.comments.push(this.comment);
     this.dishservice.putDish(this.dishcopy)
-    .subscribe(dish => { this.dish; this.dishcopy = dish; },
-      errmsg => { this.dish = null; this.dishcopy = null; this.errMsg = <any>errmsg;});         
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; },
+        errmsg => { this.dish = null; this.dishcopy = null; this.errMsg = <any>errmsg;});         
     this.commentFormDirective.resetForm();    
     this.commentFormDirective.reset({rating: 5});
   }
